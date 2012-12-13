@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;Omni.Search.Library/Texto&apos; to &apos;Texto.py&apos;" description="Rename resource &apos;Texto&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="Texto" name="Texto.py" stamp="1350602669384" updateReferences="true"/>
+</session>

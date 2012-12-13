@@ -1,0 +1,180 @@
+import LogError
+import datetime
+import SQLite
+from Site import Site
+
+class Video:
+    
+    def __init__(self):
+        self.nomeDominio = ""
+        self.descricaoURL = ""
+        self.sequencia = 0
+        self.tamanho = 0
+        self.descricaoVideo = ""
+        self.extencao = ""
+        self.duracao = 0        
+        self.timeStamp = datetime.datetime.now()
+        self.SQLiteConnection = SQLite.SQLite()
+           
+    def GetSequencia(self):        
+        try:           
+            retorno = 1
+            sqlQuery = " select MAX(CD_SEQUENCIA) from TB_VIDEOS where NM_DOMINIO = '" + self.nomeDominio + "' AND DS_URL = '" + self.descricaoURL + "'"
+            
+            if(not self.SQLiteConnection.IsConnected()):
+                if(not self.SQLiteConnection.Connect()):
+                    raise("Erro ao conectar na base.")
+            
+            rows = self.SQLiteConnection.Select(sqlQuery)
+            
+            for row in rows:
+                if(row[0] != None):
+                    retorno = row[0] + 1
+            
+            return retorno 
+        except ValueError:
+            LogError.LogError.Save(ValueError)
+            raise Exception(ValueError)               
+        finally:
+            self.SQLiteConnection.Disconnect()
+        
+    def Insert(self):
+        try:
+            if(self.nomeDominio == "" or self.descricaoURL == "" or self.sequencia <= 0):
+                raise("O nome do dominio, a descrição da URL e a sequencia não podem ser vazio.")
+           
+            site = Site()
+            site.nomeDominio = self.nomeDominio
+            site.descricaoURL = self.descricaoURL
+            
+            if(not self.SQLiteConnection.IsConnected()):
+                if(not self.SQLiteConnection.Connect()):
+                    raise("Erro ao conectar na base.")
+            
+            site.SQLiteConnection = self.SQLiteConnection
+            
+            sites = site.Select()
+            if(sites.__len__() <= 0):
+                site.Insert()
+
+            self.sequencia = self.GetSequencia()                
+            sqlQuery = " insert into TB_VIDEOS values('"
+            sqlQuery = sqlQuery + self.nomeDominio + "', '"
+            sqlQuery = sqlQuery + self.descricaoURL + "', "
+            sqlQuery = sqlQuery + self.sequencia + ", "
+            sqlQuery = sqlQuery + self.tamanho + ", '"
+            sqlQuery = sqlQuery + self.extencao + "', "
+            sqlQuery = sqlQuery + self.duracao + ", "            
+            sqlQuery = sqlQuery + "datetime('now')) "
+            
+            if(not self.SQLiteConnection.Execute(sqlQuery)):
+                raise("Erro ao inserir video.")
+            
+        except ValueError:
+            LogError.LogError.Save(ValueError)
+            raise Exception(ValueError)       
+        
+        finally:
+            self.SQLiteConnection.Disconnect()
+            
+    def Update(self):
+        try:
+            if(self.nomeDominio == "" or self.descricaoURL == "" or self.sequencia <= 0):
+                raise("O nome do dominio, a descrição da URL e a sequencia não podem ser vazio.")
+           
+            sqlQuery = " update TB_VIDEOS set "
+            sqlQuery = sqlQuery + "QT_TAMANHO = " + self.tamanho + ", "
+            sqlQuery = sqlQuery + "DS_EXTENCAO = '" + self.extencao + "', "
+            sqlQuery = sqlQuery + "QT_DURACAO = " + self.duracao + ", "
+            sqlQuery = sqlQuery + "DT_TIME_STAMP = datetime('now')) "             
+            sqlQuery = sqlQuery + " where NM_DOMINIO = '" + self.nomeDominio + "'"
+            sqlQuery = sqlQuery + " and DS_URL = '" + self.descricaoURL + "'"
+            sqlQuery = sqlQuery + " and CD_SEQUENCIA = " + self.sequencia
+            
+            if(not self.SQLiteConnection.IsConnected()):
+                if(not self.SQLiteConnection.Connect()):
+                    raise("Erro ao conectar na base.")
+            
+            if(not self.SQLiteConnection.Execute(sqlQuery)):
+                raise("Erro ao atualizar video.")
+            
+        except ValueError:
+            LogError.LogError.Save(ValueError)
+            raise Exception(ValueError)       
+        
+        finally:
+            self.SQLiteConnection.Disconnect() 
+
+
+    def Delete(self):
+        try:
+            if(self.nomeDominio == "" or self.descricaoURL == "" or self.sequencia <= 0):
+                raise("O nome do dominio, a descrição da URL e a sequencia não podem ser vazio.")
+           
+            sqlQuery = " delete from TB_VIDEOS "             
+            sqlQuery = sqlQuery + " where NM_DOMINIO = '" + self.nomeDominio + "'"
+            sqlQuery = sqlQuery + " and DS_URL = '" + self.descricaoURL + "'"
+            sqlQuery = sqlQuery + " and CD_SEQUENCIA = " + self.sequencia 
+            
+            if(not self.SQLiteConnection.IsConnected()):
+                if(not self.SQLiteConnection.Connect()):
+                    raise("Erro ao conectar na base.")
+            
+            if(not self.SQLiteConnection.Execute(sqlQuery)):
+                raise("Erro ao deletar imagem.")
+            
+        except ValueError:
+            LogError.LogError.Save(ValueError)
+            raise Exception(ValueError)       
+        
+        finally:
+            self.SQLiteConnection.Disconnect() 
+
+
+    def ToObject(self, row):
+        try:
+            video = Video()
+            video.nomeDominio =  row[0]
+            video.descricaoURL = row[1]
+            video.sequencia = row[2]
+            video.tamanho = row[3]
+            video.extencao = row[4]
+            video.duracao = row[5]            
+            video.timeStamp = row[6]
+            return video
+        except ValueError:
+            LogError.LogError.Save(ValueError)
+            raise Exception(ValueError)         
+
+    def Select(self):
+        try:           
+            sqlQuery = " select * from TB_VIDEOS "
+            sqlQueryTemp = " where "
+            
+            if(self.nomeDominio != ""):             
+                sqlQuery = sqlQueryTemp + " NM_DOMINIO = '" + self.nomeDominio + "'"
+                sqlQueryTemp = " and "
+                
+            if(self.descricaoURL != ""):             
+                sqlQuery = sqlQueryTemp + " DS_URL = '" + self.descricaoURL + "'"
+                sqlQueryTemp = " and "
+                
+            if(self.sequencia > 0):             
+                sqlQuery = sqlQueryTemp + " CD_SEQUENCIA = " + self.sequencia             
+            
+            if(not self.SQLiteConnection.IsConnected()):
+                if(not self.SQLiteConnection.Connect()):
+                    raise("Erro ao conectar na base.")
+            
+            rows = self.SQLiteConnection.Select(sqlQuery)
+            videos = []
+            for row in rows:
+                video = self.ToObject(self,row)
+                videos.append(video)
+                
+            return videos
+        except ValueError:
+            LogError.LogError.Save(ValueError)
+            raise Exception(ValueError)               
+        finally:
+            self.SQLiteConnection.Disconnect()

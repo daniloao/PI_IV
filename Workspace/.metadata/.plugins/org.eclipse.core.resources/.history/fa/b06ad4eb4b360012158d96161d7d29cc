@@ -1,0 +1,27 @@
+from ZSI.ServiceContainer import ServiceContainer, SOAPRequestHandler
+from MatheService_services_server import MatheService
+
+import os
+
+class MySOAPRequestHandler(SOAPRequestHandler):
+
+    def do_GET(self):
+    #Return the WSDL file. We expect to get the location from the
+    #invocation URL ("path").
+        wsdlfile = os.path.join('.', self.path.replace('/', "", 1) + ".wsdl")
+        print ">>>>> using wsdl file", wsdlfile
+        wsdl = open(wsdlfile).read()
+        self.send_xml(wsdl)
+        
+# Copied from ZSI.ServiceContainer, extended to instantiate with a custom
+# request handler
+
+def AsServer(port=80, services=(), RequestHandlerClass=SOAPRequestHandler):
+    address = ('127.0.0.1', port)
+    sc = ServiceContainer(address, RequestHandlerClass=RequestHandlerClass)
+    for service in services:
+        path = service.getPost()
+        sc.setNode(service, path)
+    sc.serve_forever()
+    
+AsServer(port=8080, services=[MatheService()], RequestHandlerClass=MySOAPRequestHandler)

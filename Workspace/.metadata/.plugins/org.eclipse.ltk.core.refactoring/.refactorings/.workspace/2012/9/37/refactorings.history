@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;Omni.Search.Settings&apos; to &apos;Omni.Search.IO&apos;" description="Rename resource &apos;Omni.Search.Settings&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="/Omni.Search.Settings" name="Omni.Search.IO" stamp="1346802668598" updateReferences="true"/>
+</session>

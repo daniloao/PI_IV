@@ -1,0 +1,9 @@
+import SQLite
+import Dominio
+class Test:
+    if __name__ == '__main__':
+
+        a = Dominio.Site()
+        a.ReadUrl("http://www.globo.com")
+        
+        

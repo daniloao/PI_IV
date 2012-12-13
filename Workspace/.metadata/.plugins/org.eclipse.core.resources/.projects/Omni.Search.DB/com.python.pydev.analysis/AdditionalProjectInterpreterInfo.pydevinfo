@@ -1,0 +1,36 @@
+-- VERSION_3
+-- START DISKCACHE
+C:\Danilo\Workspace\.metadata\.plugins\org.eclipse.core.resources\.projects\Omni.Search.DB\com.python.pydev.analysis\v1_indexcache
+.v1_indexcache
+SQLite|0|C:\Danilo\Workspace\Omni.Search.DB\SQLite.py
+SqlServer|0|C:\Danilo\Workspace\Omni.Search.DB\SqlServer.py
+-- END DISKCACHE
+-- START DICTIONARY
+10
+5=SQLite.__init__
+8=SqlServer.Connect
+10=SQLite.Select
+9=SQLite.Execute
+4=SQLite.Connect
+3=SQLite.Disconnect
+6=SqlServer.__init__
+2=SQLite
+7=SqlServer.Disconnect
+1=SqlServer
+-- END DICTIONARY
+-- START TREE 1
+1
+sql|2|SqlServer!9@SQLite!17@
+-- END TREE
+-- START TREE 2
+9
+__i|2|__init__!2&18@__init__!1&10@
+_co|8|_connection!3&19@_connection!4&19@_connection!5&19@_connection_string!6&11@_connection!7&11@_connection!8&11@_connection!6&11@_connection_string!5&19@
+_cu|6|_cursor!7&11@_cursor!8&11@_cursor!6&11@_cursor!3&19@_cursor!4&19@_cursor!5&19@
+_is|5|_is_internal_connection!9&19@_is_internal_connection!10&19@_is_internal_connection!5&19@_is_internal_connection!7&11@_is_internal_connection!6&11@
+con|4|Connect!2&18@ConnectionString!1&10@Connect!1&10@ConnectionString!2&18@
+dis|2|Disconnect!2&18@Disconnect!1&10@
+exe|1|Execute!2&18@
+isc|1|IsConnected!2&18@
+sel|1|Select!2&18@
+-- END TREE

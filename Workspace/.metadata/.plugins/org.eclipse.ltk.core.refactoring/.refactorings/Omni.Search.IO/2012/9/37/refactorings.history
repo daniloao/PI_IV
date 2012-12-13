@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;Omni.Search.IO/LogError&apos; to &apos;LogError.py&apos;" description="Rename resource &apos;LogError&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="LogError" name="LogError.py" stamp="1346802867326" updateReferences="true"/>
+</session>

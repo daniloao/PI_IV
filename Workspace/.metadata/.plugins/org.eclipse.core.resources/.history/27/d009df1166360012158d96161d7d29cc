@@ -1,0 +1,10 @@
+import SQLite
+import Dominio
+import Site
+class Test:
+    if __name__ == '__main__':
+
+        a = Site.Site()
+        a.buscaImg("http://www.globo.com")
+        
+        

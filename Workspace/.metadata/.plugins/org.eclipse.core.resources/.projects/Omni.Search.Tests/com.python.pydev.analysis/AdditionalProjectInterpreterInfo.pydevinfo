@@ -1,0 +1,18 @@
+-- VERSION_3
+-- START DISKCACHE
+C:\Danilo\Workspace\.metadata\.plugins\org.eclipse.core.resources\.projects\Omni.Search.Tests\com.python.pydev.analysis\v1_indexcache
+.v1_indexcache
+Test|0|C:\Danilo\Workspace\Omni.Search.Tests\Test.py
+-- END DISKCACHE
+-- START DICTIONARY
+1
+1=Test
+-- END DICTIONARY
+-- START TREE 1
+1
+tes|1|Test!9@
+-- END TREE
+-- START TREE 2
+1
+a|1|a!1&11@
+-- END TREE

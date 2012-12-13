@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<repositories-view>
+	<repository id=":pserver:daniloao@github.com:git@github.com:guilhermesteves/omnisearch.git">
+		<module path="/" lastAcessTime="1349393480663">
+		</module>
+	</repository>
+	<repository id=":extssh:daniloao@gmail.com@github.com:git@github.com:guilhermesteves/omnisearch.git">
+		<module path="/" lastAcessTime="1349393480663">
+		</module>
+	</repository>
+	<repository id=":pserverssh2:daniloao@github.com:git@github.com:guilhermesteves/omnisearch.git">
+		<module path="/" lastAcessTime="1349393480663">
+		</module>
+	</repository>
+	<repository id=":pserver:daniloao@gmail.com@github.com:git@github.com:guilhermesteves/omnisearch.git">
+		<module path="/" lastAcessTime="1349393480664">
+		</module>
+	</repository>
+</repositories-view>

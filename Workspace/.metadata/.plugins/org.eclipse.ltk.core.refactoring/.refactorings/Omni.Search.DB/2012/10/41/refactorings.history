@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;Omni.Search.DB/SQLite&apos; to &apos;SQLite.py&apos;" description="Rename resource &apos;SQLite&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="SQLite" name="SQLite.py" stamp="1349539400122" updateReferences="true"/>
+</session>
